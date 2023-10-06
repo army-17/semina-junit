@@ -1,2 +1,4 @@
 # semina-junit
-JUnit 테스트 코드 작성
+
+### Funin Seminar : JUnit 
+JUnit 테스트를 위한 코드 작성

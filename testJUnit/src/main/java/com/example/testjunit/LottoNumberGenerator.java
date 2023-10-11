@@ -24,4 +24,8 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
+    public int getPrice(int price) {
+        return price;
+    }
+
 }

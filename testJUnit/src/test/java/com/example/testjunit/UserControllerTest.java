@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.*;
 
+@Log4j2
+// @ExtendWith() : JUnit5와 Mockito 연동을 위한 annotation
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
 
@@ -25,7 +27,7 @@ public class UserControllerTest {
     @RequiredArgsConstructor
     @RestController
     @RequestMapping(value = "/user")
-    @Log4j2
+
 
     public class UserController {
 
@@ -38,10 +40,11 @@ public class UserControllerTest {
         private MockMvc mockMvc;
 
 
-        // @BeforeEach : 각 테스트 메소드 실행되기 전에 실행되어야함
-        @BeforeEach
-        public void init() {
-            mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+//        // @BeforeEach : 각 테스트 메소드 실행되기 전에 실행되어야함
+//        @BeforeEach
+//        public void init() {
+//
+//            mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
         }
 
         /*
@@ -51,24 +54,16 @@ public class UserControllerTest {
          */
 
 
-        @DisplayName("회원가입 성공")
-        @Test
-        void signUpSuccess() throws Exception {
+//        //회원가입 API
+//        @PostMapping(value = "/signUp")
+//        public ResponseEntity<String> signUp(@RequestBody SignUpDto signUpDto) {
+//            return (userService.findByEmail(signUpDto.getEmail()) != null) ?
+//                    ResponseEntity.badRequest().build() : ResponseEntity.ok("회원가입 가능");
+//        }
+//
+//    }
 
-            //given
-            SignUpDto signUpDto = new SignUpDto();
 
-        }
-
-
-        //회원가입 API
-        @PostMapping(value = "/signUp")
-        public ResponseEntity<String> signUp(@RequestBody SignUpDto signUpDto) {
-            return (userService.findByEmail(signUpDto.getEmail()) != null) ?
-                    ResponseEntity.badRequest().build() : ResponseEntity.ok("회원가입 가능");
-        }
-
-    }
 
 
 

@@ -15,8 +15,4 @@ public class UserService {
         return signupDto;
     }
 
-    public UserDto getUser() {
-        return new UserDto("홍길동", "userId", "userP");
-
-    }
 }

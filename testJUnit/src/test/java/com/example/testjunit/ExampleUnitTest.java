@@ -10,14 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ExampleUnitTest {
 
     @Mock
     Animal animal;
 
+
+    // 참고 사이트 : https://www.crocus.co.kr/1556
     @Test
     public void mockTest(){
 
@@ -35,11 +36,15 @@ public class ExampleUnitTest {
         Animal animal = mock(Animal.class);
         assertTrue(animal != null);
 
-        when(animal.getAge()).thenReturn(30);
-        when(animal.getName()).thenReturn("참새");
-        when(animal.getIsFly()).thenReturn(true);
+//        when(animal.getAge()).thenReturn(30);
+//        when(animal.getName()).thenReturn("참새");
+//        when(animal.getIsFly()).thenReturn(true);
 
-        assertTrue(animal.getAge() == 20);
+        doReturn(30).when(animal).getAge();
+        doReturn("참새").when(animal).getName();
+        doReturn(true).when(animal).getIsFly();
+
+        assertTrue(animal.getAge() == 30);
         assertTrue(animal.getName().equals("참새"));
 //        assertTrue(animal.getIsFly() == false);
 
@@ -47,6 +52,8 @@ public class ExampleUnitTest {
 
     @Test
     public void mockTest3(){
+
+        // 객체 자체를 stub로 만드는 과정
         Animal animal2 = mock(Animal.class);
 
         List<String> animalList = new ArrayList<>();
@@ -54,13 +61,35 @@ public class ExampleUnitTest {
         animalList.add("코끼리");
         animalList.add("독수리");
 
-        when(animal.getAnimalList()).thenReturn(animalList);
+        when(animal2.getAnimalList()).thenReturn(animalList);
 
         assertNotNull(animalList);
         assertEquals(3, animalList.size());
 
+        System.out.println(animal2.getAnimalList().get(0));
 
     }
+
+    @Test
+    public void mockTest4(){
+        Animal animal = mock(Animal.class);
+
+        // animal의 setAge를 20 이라고 호출한다면 예외를 발생시키는 코드
+        // eq : 정확히 / eq(20)은 정확히 20이라는 의미
+        doThrow(new RuntimeException()).when(animal).setAge(eq(20));
+
+        animal.setAge(30);
+        animal.setAge(15);
+        animal.setAge(222);
+        animal.setAge(123);
+        animal.setAge(20);
+        animal.setAge(11);
+        animal.setAge(60);
+
+    }
+
+    @Te
+
 
 }
 

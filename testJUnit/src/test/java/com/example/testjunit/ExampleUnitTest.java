@@ -88,7 +88,26 @@ public class ExampleUnitTest {
 
     }
 
-    @Te
+    // Verify를 이용한 검증
+    @Test
+    public void mockTest5(){
+        Animal animal = mock(Animal.class);
+        animal.setName("참새");
+        animal.setName("강아지");
+        animal.setName("고양이");
+
+        // n번 호출했는지 체크
+        verify(animal, times(3)).setName(any(String.class));
+
+        // 호출 안 했는지 체크 (## 확인사항 : 호출이 정확히 무엇인지 확인)
+//        verify(animal,never()).setName(any(String.class));
+        verify(animal, never()).setAge(any(int.class));
+//        verify(animal, never()).getAge();
+
+
+        // 최소한 1번 이상 호출했는지 체크
+//        verify(animal, atLeastOnce()).setAge(any(int.class));
+    }
 
 
 }

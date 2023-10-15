@@ -2,6 +2,7 @@ package com.example.testjunit;
 
 import com.example.testjunit.dto.Animal;
 
+import io.micrometer.common.annotation.ValueExpressionResolver;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -96,17 +97,31 @@ public class ExampleUnitTest {
         animal.setName("강아지");
         animal.setName("고양이");
 
+        animal.getName();
+        animal.getName();
+        animal.getName();
+
         // n번 호출했는지 체크
         verify(animal, times(3)).setName(any(String.class));
 
-        // 호출 안 했는지 체크 (## 확인사항 : 호출이 정확히 무엇인지 확인)
+        // 호출 안 했는지 체크 (호출하면 오류 발생)
 //        verify(animal,never()).setName(any(String.class));
-        verify(animal, never()).setAge(any(int.class));
+//        verify(animal,never()).setAge(any(int.class));
+//        verify(animal, never()).getName();
+//        verify(animal, never()).setAge(any(int.class));
 //        verify(animal, never()).getAge();
 
-
         // 최소한 1번 이상 호출했는지 체크
-//        verify(animal, atLeastOnce()).setAge(any(int.class));
+        verify(animal, atLeastOnce()).setName(any(String.class));
+        // 2번 이하 호출했는지 체크
+//        verify(animal, atMost(2)).getName();
+//        verify(animal, atMost(2)).setName(any(String.class));
+        // 2번 이상 호출했는지 체크
+//        verify(animal, atLeast(4)).setName(any(String.class));
+        // 지정된 시간(millis)안으로 메소드를 호출했는지 체크
+//        verify(animal, timeout(100)).setName(any(String.class));
+        // 지정된 시간(millis)안으로 1번 이상 메소드를 호출했는지 체크
+        verify(animal, timeout(100).atLeast(1)).setName(any(String.class));
     }
 
 

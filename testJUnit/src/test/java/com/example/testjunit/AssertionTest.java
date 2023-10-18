@@ -1,15 +1,20 @@
 package com.example.testjunit;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-public class LottoNumberGeneratorTest {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.assertj.core.api.Assertions.*;
+
+public class AssertionTest {
 
     @DisplayName("로또 번호 갯수 테스트 1")
     @Test
@@ -110,7 +115,7 @@ public class LottoNumberGeneratorTest {
         String expected = "Hello, World";
         String actual = "hello world23433";
 //
-//        assertThat(actual, is(equalTo(expected)));
+        assertThat(actual, is(equalTo(expected)));
 
 
 
@@ -130,10 +135,50 @@ public class LottoNumberGeneratorTest {
 
         int expectedNum = 1234;
 
-        assertThat(expectedNum)
-                .isBetween(12, 1280);
+//        assertThat(expectedNum)
+//                .isBetween(12, 1280);
     }
 
+    // 라이브러리 AssertJ vs Hamcrest
+    @Test
+    @DisplayName("Hamcrest 테스트")
+    public void testHamcrest(){
+
+        // AssertJ 라이브러리에서 주로 사용되는 구문
+        assertThat(10)
+                .isEqualTo(20);
+
+        // Hamcrest 라이브러리에서 주로 사용되는 구문 : 매치어를 기반으로 하는 테스트 라이브러리로 강력한 맞춤 검사를 지원
+        assertThat(2*4, equalTo(8));
+
+
+    }
+
+    // 사용자 정의 매처 : isEven()
+    public static Matcher<Integer> isEven(){
+        return new TypeSafeMatcher<Integer>() {
+            @Override
+            protected boolean matchesSafely(Integer number) {
+                return number % 2 == 0;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("an even number");
+            }
+        };
+    }
+
+    @Test
+    @DisplayName("사용자 정의 매처 Test")
+    public void testCustomizingMatcher(){
+        int evenNumber = 4;
+        int oddNumber = 7;
+
+        assertThat(evenNumber, isEven());
+        assertThat(oddNumber, isEven());
+
+    }
 
 
 }

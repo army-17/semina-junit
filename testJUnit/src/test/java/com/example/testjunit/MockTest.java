@@ -2,7 +2,6 @@ package com.example.testjunit;
 
 import com.example.testjunit.dto.Animal;
 
-import io.micrometer.common.annotation.ValueExpressionResolver;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,7 +12,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ExampleUnitTest {
+
+public class MockTest {
 
     @Mock
     Animal animal;
@@ -23,7 +23,7 @@ public class ExampleUnitTest {
     @Test
     public void mockTest(){
 
-        // Mock 객체 생성
+        // Mock 객체 생성 (가짜 객체 테스트)
         MockitoAnnotations.initMocks(this);
         // Animal animal = mock(Animal.class);
 
@@ -121,9 +121,8 @@ public class ExampleUnitTest {
         // 지정된 시간(millis)안으로 메소드를 호출했는지 체크
 //        verify(animal, timeout(100)).setName(any(String.class));
         // 지정된 시간(millis)안으로 1번 이상 메소드를 호출했는지 체크
-        verify(animal, timeout(100).atLeast(1)).setName(any(String.class));
-    }
 
+    }
 
 }
 

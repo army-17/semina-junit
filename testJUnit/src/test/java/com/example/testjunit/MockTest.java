@@ -19,11 +19,10 @@ public class MockTest {
     Animal animal;
 
 
-    // 참고 사이트 : https://www.crocus.co.kr/1556
     @Test
     public void mockTest(){
 
-        // Mock 객체 생성 (가짜 객체 테스트)
+        // Mock 객체 생성 (가짜 객체 만들기)
         MockitoAnnotations.initMocks(this);
         // Animal animal = mock(Animal.class);
 
@@ -31,9 +30,12 @@ public class MockTest {
 
     }
 
+    /* ---- given/when/then 패턴 ---- */
     @Test
     public void mockTest2(){
 
+
+        // 1) given(준비) : 어떠한 데이터가 준비되었을 때
         Animal animal = mock(Animal.class);
         assertTrue(animal != null);
 
@@ -41,10 +43,14 @@ public class MockTest {
 //        when(animal.getName()).thenReturn("참새");
 //        when(animal.getIsFly()).thenReturn(true);
 
+        // 2) when(실행) : 어떠한 함수를 실행하면
+        // 가짜 각체의 메서드 호출에 대한 Stubbing
+        // thenReturn() 보다 doReturn() 이 사용되도록 권장
         doReturn(30).when(animal).getAge();
         doReturn("참새").when(animal).getName();
         doReturn(true).when(animal).getIsFly();
 
+        // 3) then(결과 검증) : 어떠한 결과가 나와야 한다. => 단정문 사용
         assertTrue(animal.getAge() == 30);
         assertTrue(animal.getName().equals("참새"));
 //        assertTrue(animal.getIsFly() == false);
@@ -54,7 +60,7 @@ public class MockTest {
     @Test
     public void mockTest3(){
 
-        // 객체 자체를 stub로 만드는 과정
+        // 객체 자체를 stub로 만드는 과정 = stubbing
         Animal animal2 = mock(Animal.class);
 
         List<String> animalList = new ArrayList<>();
@@ -62,12 +68,15 @@ public class MockTest {
         animalList.add("코끼리");
         animalList.add("독수리");
 
+
+        // mock 객체 stubbing
         when(animal2.getAnimalList()).thenReturn(animalList);
 
-        assertNotNull(animalList);
-        assertEquals(3, animalList.size());
+        assertNotNull(animal2.getAnimalList());
+        assertNull(animal2.getAnimalList());
+        //assertEquals(3, animalList.size());
 
-        System.out.println(animal2.getAnimalList().get(0));
+        //System.out.println(animal2.getAnimalList().get(0));
 
     }
 
@@ -89,7 +98,7 @@ public class MockTest {
 
     }
 
-    // Verify를 이용한 검증
+    // verify()를 이용한 검증
     @Test
     public void mockTest5(){
         Animal animal = mock(Animal.class);

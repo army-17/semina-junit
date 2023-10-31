@@ -37,19 +37,32 @@ public class AnnotationTest {
     public void JunitAnnotationTest4() throws Exception {
 
         String str = null;
-//        int length = str.length();
+        int length = str.length();
 
     }
+
+
+    /*******  @BeforeClass 와 @Before  *******/
 
     @BeforeClass
     public static void beforeClassTest(){
         System.out.println("@BeforeClass");
     }
 
+    @AfterClass
+    public static void afterClassTest(){
+        System.out.println("@AfterClass");
+    }
+
     @Before
     public void beforeTest(){
         System.out.println("테스트 메소드 시작 전 @Before");
 
+    }
+
+    @After
+    public void afterTest(){
+        System.out.println("테스트 메소드 시작 후 @After");
     }
 
 

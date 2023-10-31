@@ -45,7 +45,6 @@ public class MockTest {
 
         // 2) when(실행) : 어떠한 함수를 실행하면
         // 가짜 각체의 메서드 호출에 대한 Stubbing
-        // thenReturn() 보다 doReturn() 이 사용되도록 권장
         doReturn(30).when(animal).getAge();
         doReturn("참새").when(animal).getName();
         doReturn(true).when(animal).getIsFly();

@@ -2,14 +2,8 @@ package com.example.testjunit;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
-
-
-import java.util.List;
-
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.*;
@@ -26,7 +20,7 @@ public class AssertionTest {
         int num = 3;
 
 //        Assert.assertTrue(num == 3);
-        assertTrue((num < 2), "false 입니다.");
+        assertFalse((num == 3), "false 입니다.");
 
     }
 
@@ -44,6 +38,9 @@ public class AssertionTest {
     public void testAssertThat(){
 
         String actual = "hello world23433";
+
+        assertThat(actual)
+                .endsWith("1");
 
         assertThat(actual)
                 .isEqualTo("hello world23433")

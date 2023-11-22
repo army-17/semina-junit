@@ -4,14 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.*;
 import org.junit.Test;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.DisplayName;
+
 
 
 @Slf4j
 public class AnnotationTest {
 
     @Test
-    @DisplayName("JUnit 기본 Annotation Test")
+    @DisplayName("기본 Annotation Test")
     public void JunitAnnotationTest1() {
         log.info("@DisplayName 확인");
 
@@ -44,6 +44,7 @@ public class AnnotationTest {
 
     }
 
+
     /******************************************/
     /*******  @BeforeClass 와 @Before  *******/
 
@@ -59,13 +60,13 @@ public class AnnotationTest {
 
     @Before
     public void beforeTest(){
-        System.out.println("각 메소드 시작 전 @Before");
+        System.out.println("@Before");
 
     }
 
     @After
     public void afterTest(){
-        System.out.println("각 메소드 시작 후 @After");
+        System.out.println("@After");
     }
 
 
